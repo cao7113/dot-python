@@ -1,0 +1,56 @@
+# https://taskfile.dev
+version: '2'
+tasks:
+
+  t1:
+    cmds:
+      - python tests/unittest/test_sum.py
+  t2:
+    cmds:
+      # - pytest tests/pytest/test_sum.py
+      - pytest tests/pytest/test_sum.py::test_sum
+  t3:
+    cmds:
+    - |
+      cd tests/layout_demo
+      task default
+  t4:
+    cmds:
+    # python -m unittest -v to-test-module
+    - |
+      cd tests/unittest
+      python -m unittest discover
+      # python -m unittest discover -s tests -t src
+
+  install-pytest:
+    cmds:
+      - pip install pytest
+      - pytest --version
+
+  version:
+    cmds:
+      - |
+        # python --version
+        python -V
+        python2.7 -V
+        python3 -V
+
+  install-python3:
+    desc: https://docs.brew.sh/Homebrew-and-Python
+    cmds:
+      - brew install python
+      - brew info python
+      - python3 -V
+      # - ls -l /usr/local/opt/python@3.8/libexec/bin
+      # Python has been installed as
+      #   /usr/local/bin/python3
+      
+      # You can install Python packages with
+      #   pip3 install <package>
+      # They will install into the site-package directory
+      #   /usr/local/lib/python3.8/site-packages
+
+  macos-builtin-python:
+    cmds:
+    - ls -l /System/Library/Frameworks/Python.framework/Versions/
+    # - which python # 2.7

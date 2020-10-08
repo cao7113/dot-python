@@ -1,0 +1,19 @@
+# https://taskfile.dev
+version: '2'
+tasks:
+  default:
+    cmds:
+    - task: inside
+    - task: outside
+
+  inside:
+    cmds:
+    - |
+      cd inside
+      pytest --pyargs utils
+
+  outside:
+    cmds:
+    - |
+      cd outside
+      set PYTHONPATH=src && pytest

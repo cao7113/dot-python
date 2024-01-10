@@ -54,12 +54,6 @@ class baidu(testutil.MyTest):
 
 
 
-
-
-
-
-
-
 if __name__ == '__main__':
     unittest.main()
 

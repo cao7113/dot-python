@@ -1,0 +1,15 @@
+# https://taskfile.dev
+version: "3"
+tasks:
+  run: uvicorn main:app --reload
+  open: open http://localhost:8000
+  doc: open http://127.0.0.1:8000/docs
+  #  http://127.0.0.1:8000/redoc
+
+  lock: pip freeze > requirements.txt
+  setup:
+    cmds:
+      - |
+        pip install fastapi
+        # pip install "fastapi[all]"
+        pip install "uvicorn[standard]"

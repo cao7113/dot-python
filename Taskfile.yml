@@ -1,0 +1,86 @@
+# https://taskfile.dev
+version: "3"
+tasks:
+  hi: python hello.py
+
+  t1:
+    cmds:
+      - python tests/unittest/test_sum.py
+  t2:
+    cmds:
+      # - pytest tests/pytest/test_sum.py
+      - pytest tests/pytest/test_sum.py::test_sum
+  t3:
+    cmds:
+      - |
+        cd tests/layout_demo
+        task default
+  t4:
+    cmds:
+      # python -m unittest -v to-test-module
+      - |
+        cd tests/unittest
+        python -m unittest discover
+        # python -m unittest discover -s tests -t src
+
+  install-pytest:
+    cmds:
+      - pip install pytest
+      - pytest --version
+
+  # pipenv https://github.com/pypa/pipenv
+  install-pipenv:
+    desc: install pipenv like bundler, npm
+    cmds:
+      - pip install --user pipenv
+      - pipenv --version
+
+      # pip freeze > requirements.txt
+      # pip install -r requirements.txt
+      # pipenv install
+      # To activate this project's virtualenv, run pipenv shell.
+      # Alternatively, run a command inside the virtualenv with pipenv run
+
+  ## Setup python
+
+  # suggested dependencies
+  # https://github.com/pyenv/pyenv/wiki#suggested-build-environment
+
+  asdf-install-python:
+    desc: install as https://github.com/asdf-community/asdf-python
+    cmds:
+      - |
+        # https://github.com/asdf-community/asdf-python
+        asdf plugin add python || true
+        asdf install python 3.12.1
+        asdf global python 3.12.1
+        # asdf global python 3.12.1 2.7.13
+        # asdf local python 3.12.1
+      - |
+        python --version
+        pip --version
+
+  version:
+    cmds:
+      - |
+        # python --version
+        python -V
+        python2 -V
+        python3 -V
+
+  # https://github.com/pyenv/pyenv
+
+  # brew-install-python3:
+  #   desc: https://docs.brew.sh/Homebrew-and-Python
+  #   cmds:
+  #     - brew install python
+  #     - brew info python
+  #     - python3 -V
+  #     - pip --version
+  #     # - ls -l /usr/local/opt/python@3.8/libexec/bin
+  #     # Python has been installed as
+  #     #   /usr/local/bin/python3
+  #     # You can install Python packages with
+  #     #   pip3 install <package>
+  #     # They will install into the site-package directory
+  #     #   /usr/local/lib/python3.8/site-packages
